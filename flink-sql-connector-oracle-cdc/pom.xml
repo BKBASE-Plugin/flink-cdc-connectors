@@ -18,8 +18,8 @@ under the License.
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>flink-cdc-connectors</artifactId>
-        <groupId>com.ververica</groupId>
-        <version>2.3.0</version>
+        <groupId>com.tencent.bk.base.datahub</groupId>
+        <version>${revision}</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -27,7 +27,7 @@ under the License.
 
     <dependencies>
         <dependency>
-            <groupId>com.ververica</groupId>
+            <groupId>com.tencent.bk.base.datahub</groupId>
             <artifactId>flink-connector-oracle-cdc</artifactId>
             <version>${project.version}</version>
         </dependency>
@@ -55,9 +55,9 @@ under the License.
                                     <include>io.debezium:debezium-core</include>
                                     <incldue>io.debezium:debezium-ddl-parser</incldue>
                                     <include>io.debezium:debezium-connector-oracle</include>
-                                    <include>com.ververica:flink-connector-debezium</include>
-                                    <include>com.ververica:flink-cdc-base</include>
-                                    <include>com.ververica:flink-connector-oracle-cdc</include>
+                                    <include>com.tencent.bk.base.datahub:flink-cdc-base</include>
+                                    <include>com.tencent.bk.base.datahub:flink-connector-debezium</include>
+                                    <include>com.tencent.bk.base.datahub:flink-connector-oracle-cdc</include>
                                     <include>org.antlr:antlr4-runtime</include>
                                     <include>com.github.jsqlparser:jsqlparser</include>
                                     <include>com.oracle.ojdbc:*</include>
