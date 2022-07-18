@@ -20,8 +20,8 @@ under the License.
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>flink-cdc-connectors</artifactId>
-        <groupId>com.ververica</groupId>
-        <version>2.2.1</version>
+        <groupId>com.tencent.bk.base.datahub</groupId>
+        <version>${revision}</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -57,42 +57,42 @@ under the License.
 
         <!-- CDC connectors test utils -->
         <dependency>
-            <groupId>com.ververica</groupId>
+            <groupId>com.tencent.bk.base.datahub</groupId>
             <artifactId>flink-connector-mysql-cdc</artifactId>
             <version>${project.version}</version>
             <type>test-jar</type>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>com.ververica</groupId>
+            <groupId>com.tencent.bk.base.datahub</groupId>
             <artifactId>flink-connector-mongodb-cdc</artifactId>
             <version>${project.version}</version>
             <type>test-jar</type>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>com.ververica</groupId>
+            <groupId>com.tencent.bk.base.datahub</groupId>
             <artifactId>flink-connector-oracle-cdc</artifactId>
             <version>${project.version}</version>
             <type>test-jar</type>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>com.ververica</groupId>
+            <groupId>com.tencent.bk.base.datahub</groupId>
             <artifactId>flink-connector-sqlserver-cdc</artifactId>
             <version>${project.version}</version>
             <type>test-jar</type>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>com.ververica</groupId>
+            <groupId>com.tencent.bk.base.datahub</groupId>
             <artifactId>flink-connector-tidb-cdc</artifactId>
             <version>${project.version}</version>
             <type>test-jar</type>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>com.ververica</groupId>
+            <groupId>com.tencent.bk.base.datahub</groupId>
             <artifactId>flink-connector-test-util</artifactId>
             <version>${project.version}</version>
             <scope>test</scope>
@@ -212,7 +212,7 @@ under the License.
                         </artifactItem>
 
                         <artifactItem>
-                            <groupId>com.ververica</groupId>
+                            <groupId>com.tencent.bk.base.datahub</groupId>
                             <artifactId>flink-sql-connector-mysql-cdc</artifactId>
                             <version>${project.version}</version>
                             <destFileName>mysql-cdc-connector.jar</destFileName>
@@ -222,7 +222,7 @@ under the License.
                         </artifactItem>
 
                         <artifactItem>
-                            <groupId>com.ververica</groupId>
+                            <groupId>com.tencent.bk.base.datahub</groupId>
                             <artifactId>flink-sql-connector-postgres-cdc</artifactId>
                             <version>${project.version}</version>
                             <destFileName>postgres-cdc-connector.jar</destFileName>
@@ -232,7 +232,7 @@ under the License.
                         </artifactItem>
 
                         <artifactItem>
-                            <groupId>com.ververica</groupId>
+                            <groupId>com.tencent.bk.base.datahub</groupId>
                             <artifactId>flink-sql-connector-mongodb-cdc</artifactId>
                             <version>${project.version}</version>
                             <destFileName>mongodb-cdc-connector.jar</destFileName>
@@ -242,7 +242,7 @@ under the License.
                         </artifactItem>
 
                         <artifactItem>
-                            <groupId>com.ververica</groupId>
+                            <groupId>com.tencent.bk.base.datahub</groupId>
                             <artifactId>flink-sql-connector-oracle-cdc</artifactId>
                             <version>${project.version}</version>
                             <destFileName>oracle-cdc-connector.jar</destFileName>
@@ -252,7 +252,7 @@ under the License.
                         </artifactItem>
 
                         <artifactItem>
-                            <groupId>com.ververica</groupId>
+                            <groupId>com.tencent.bk.base.datahub</groupId>
                             <artifactId>flink-sql-connector-sqlserver-cdc</artifactId>
                             <version>${project.version}</version>
                             <destFileName>sqlserver-cdc-connector.jar</destFileName>
@@ -262,7 +262,7 @@ under the License.
                         </artifactItem>
 
                         <artifactItem>
-                            <groupId>com.ververica</groupId>
+                            <groupId>com.tencent.bk.base.datahub</groupId>
                             <artifactId>flink-sql-connector-tidb-cdc</artifactId>
                             <version>${project.version}</version>
                             <destFileName>tidb-cdc-connector.jar</destFileName>
