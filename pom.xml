@@ -73,7 +73,7 @@ under the License.
     </distributionManagement>
 
     <properties>
-        <revision>2.2.1</revision>
+        <revision>2.2.1-bkbase.1</revision>
         <flink.version>1.13.5</flink.version>
         <debezium.version>1.5.4.Final</debezium.version>
         <tikv.version>3.2.0</tikv.version>
