@@ -50,10 +50,10 @@ under the License.
                             <shadeTestJar>false</shadeTestJar>
                             <artifactSet>
                                 <includes>
-                                    <include>io.debezium:debezium-api</include>
-                                    <include>io.debezium:debezium-embedded</include>
-                                    <include>io.debezium:debezium-core</include>
-                                    <include>io.debezium:debezium-connector-postgres</include>
+                                    <include>com.tencent.bk.base.datahub:debezium-api</include>
+                                    <include>com.tencent.bk.base.datahub:debezium-embedded</include>
+                                    <include>com.tencent.bk.base.datahub:debezium-core</include>
+                                    <include>com.tencent.bk.base.datahub:debezium-connector-postgres</include>
                                     <include>com.tencent.bk.base.datahub:flink-connector-debezium</include>
                                     <include>com.tencent.bk.base.datahub:flink-connector-postgres-cdc</include>
                                     <include>com.google.protobuf:protobuf-java</include>
