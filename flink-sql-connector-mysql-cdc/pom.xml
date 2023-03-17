@@ -18,8 +18,8 @@ under the License.
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>flink-cdc-connectors</artifactId>
-        <groupId>com.ververica</groupId>
-        <version>2.3.0</version>
+        <groupId>com.tencent.bk.base.datahub</groupId>
+        <version>${revision}</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -27,7 +27,7 @@ under the License.
 
     <dependencies>
         <dependency>
-            <groupId>com.ververica</groupId>
+            <groupId>com.tencent.bk.base.datahub</groupId>
             <artifactId>flink-connector-mysql-cdc</artifactId>
             <version>${project.version}</version>
         </dependency>
@@ -50,13 +50,13 @@ under the License.
                             <shadeTestJar>false</shadeTestJar>
                             <artifactSet>
                                 <includes>
-                                    <include>io.debezium:debezium-api</include>
-                                    <include>io.debezium:debezium-embedded</include>
-                                    <include>io.debezium:debezium-core</include>
-                                    <include>io.debezium:debezium-ddl-parser</include>
-                                    <include>io.debezium:debezium-connector-mysql</include>
-                                    <include>com.ververica:flink-connector-debezium</include>
-                                    <include>com.ververica:flink-connector-mysql-cdc</include>
+                                    <include>com.tencent.bk.base.datahub:debezium-api</include>
+                                    <include>com.tencent.bk.base.datahub:debezium-embedded</include>
+                                    <include>com.tencent.bk.base.datahub:debezium-core</include>
+                                    <include>com.tencent.bk.base.datahub:debezium-ddl-parser</include>
+                                    <include>com.tencent.bk.base.datahub:debezium-connector-mysql</include>
+                                    <include>com.tencent.bk.base.datahub:flink-connector-debezium</include>
+                                    <include>com.tencent.bk.base.datahub:flink-connector-mysql-cdc</include>
                                     <include>org.antlr:antlr4-runtime</include>
                                     <include>org.apache.kafka:*</include>
                                     <include>mysql:mysql-connector-java</include>
