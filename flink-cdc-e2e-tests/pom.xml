@@ -310,7 +310,7 @@ under the License.
                         </artifactItem>
 
                         <artifactItem>
-                            <groupId>com.ververica</groupId>
+                            <groupId>com.tencent.bk.base.datahub</groupId>
                             <artifactId>flink-sql-connector-db2-cdc</artifactId>
                             <version>${project.version}</version>
                             <destFileName>db2-cdc-connector.jar</destFileName>

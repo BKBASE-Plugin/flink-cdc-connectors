@@ -30,7 +30,7 @@ under the License.
     <dependencies>
 
         <dependency>
-            <groupId>com.ververica</groupId>
+            <groupId>com.tencent.bk.base.datahub</groupId>
             <artifactId>flink-cdc-base</artifactId>
             <version>${project.version}</version>
         </dependency>
