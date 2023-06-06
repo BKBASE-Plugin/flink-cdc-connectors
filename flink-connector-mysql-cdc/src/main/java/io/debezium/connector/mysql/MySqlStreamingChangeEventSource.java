@@ -619,22 +619,11 @@ public class MySqlStreamingChangeEventSource
         if (upperCasedStatementBegin.equals("INSERT ")
                 || upperCasedStatementBegin.equals("UPDATE ")
                 || upperCasedStatementBegin.equals("DELETE ")) {
-            if (eventDeserializationFailureHandlingMode
-                    == EventProcessingFailureHandlingMode.FAIL) {
-                throw new DebeziumException(
-                        "Received DML '"
-                                + sql
-                                + "' for processing, binlog probably contains events generated with statement or mixed based replication format");
-            } else if (eventDeserializationFailureHandlingMode
-                    == EventProcessingFailureHandlingMode.WARN) {
-                LOGGER.warn(
-                        "Warning only: Received DML '"
-                                + sql
-                                + "' for processing, binlog probably contains events generated with statement or mixed based replication format");
-                return;
-            } else {
-                return;
-            }
+            // DBZ-3949 Ignore DML records in binlog in MySQL connector;
+            LOGGER.warn(
+                    "Received DML '{}' for processing, binlog probably contains events generated with statement or mixed based replication format",
+                    sql);
+            return;
         }
         if (sql.equalsIgnoreCase("ROLLBACK")) {
             // We have hit a ROLLBACK which is not supported

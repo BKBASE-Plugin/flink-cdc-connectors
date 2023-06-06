@@ -30,14 +30,14 @@ under the License.
 
         <!-- Debezium dependencies -->
         <dependency>
-            <groupId>com.tencent.bk.base.datahub</groupId>
+            <groupId>io.debezium</groupId>
             <artifactId>debezium-api</artifactId>
-            <version>${bk.debezium.version}</version>
+            <version>${debezium.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.tencent.bk.base.datahub</groupId>
+            <groupId>io.debezium</groupId>
             <artifactId>debezium-embedded</artifactId>
-            <version>${bk.debezium.version}</version>
+            <version>${debezium.version}</version>
             <exclusions>
                 <exclusion>
                     <artifactId>kafka-log4j-appender</artifactId>

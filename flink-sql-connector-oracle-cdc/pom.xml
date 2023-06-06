@@ -50,11 +50,11 @@ under the License.
                             <shadeTestJar>false</shadeTestJar>
                             <artifactSet>
                                 <includes>
-                                    <include>com.tencent.bk.base.datahub:debezium-api</include>
-                                    <include>com.tencent.bk.base.datahub:debezium-embedded</include>
-                                    <include>com.tencent.bk.base.datahub:debezium-core</include>
-                                    <incldue>com.tencent.bk.base.datahub:debezium-ddl-parser</incldue>
-                                    <include>com.tencent.bk.base.datahub:debezium-connector-oracle</include>
+                                    <include>io.debezium:debezium-api</include>
+                                    <include>io.debezium:debezium-embedded</include>
+                                    <include>io.debezium:debezium-core</include>
+                                    <incldue>io.debezium:debezium-ddl-parser</incldue>
+                                    <include>io.debezium:debezium-connector-oracle</include>
 			            <include>com.tencent.bk.base.datahub:flink-cdc-base</include>
                                     <include>com.tencent.bk.base.datahub:flink-connector-debezium</include>
                                     <include>com.tencent.bk.base.datahub:flink-connector-oracle-cdc</include>
