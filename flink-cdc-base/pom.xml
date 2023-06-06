@@ -116,9 +116,9 @@ under the License.
         <!-- Debezium test dependencies -->
 
         <dependency>
-            <groupId>com.tencent.bk.base.datahub</groupId>
+            <groupId>io.debezium</groupId>
             <artifactId>debezium-connector-mysql</artifactId>
-            <version>${bk.debezium.version}</version>
+            <version>${debezium.version}</version>
             <scope>test</scope>
         </dependency>
 
