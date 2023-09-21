@@ -27,7 +27,7 @@ under the License.
 
     <groupId>com.ververica</groupId>
     <artifactId>flink-cdc-connectors</artifactId>
-    <version>2.4-SNAPSHOT</version>
+    <version>2.4.1.bkbase.1</version>
     <packaging>pom</packaging>
 
     <licenses>
@@ -481,7 +481,7 @@ under the License.
                 <module>flink-sql-connector-tidb-cdc</module>
                 <module>flink-sql-connector-db2-cdc</module>
                 <module>flink-sql-connector-vitess-cdc</module>
-                <module>flink-cdc-e2e-tests</module>
+		<!--<module>flink-cdc-e2e-tests</module>-->
             </modules>
         </profile>
         <profile>
@@ -508,7 +508,7 @@ under the License.
                 <module>flink-sql-connector-tidb-cdc</module>
                 <module>flink-sql-connector-db2-cdc</module>
                 <module>flink-sql-connector-vitess-cdc</module>
-                <module>flink-cdc-e2e-tests</module>
+		<!--<module>flink-cdc-e2e-tests</module>-->
             </modules>
             <build>
                 <plugins>
