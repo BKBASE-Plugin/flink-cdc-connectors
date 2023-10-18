@@ -28,6 +28,7 @@ import com.ververica.cdc.connectors.mongodb.source.connection.MongoClientPool;
 import com.ververica.cdc.connectors.mongodb.source.offset.ChangeStreamDescriptor;
 import io.debezium.relational.TableId;
 import org.apache.commons.lang3.StringUtils;
+import org.bson.BsonBoolean;
 import org.bson.BsonDocument;
 import org.bson.BsonDouble;
 import org.bson.BsonInt32;
@@ -317,6 +318,23 @@ public class MongoUtils {
                 .sort(ascending("min"))
                 .into(collectionChunks);
         return collectionChunks;
+    }
+
+    public static BsonDocument readEstimatedDataSize(
+            MongoClient mongoClient,
+            TableId collectionId,
+            BsonDocument keyPattern,
+            BsonDocument min,
+            BsonDocument max) {
+        BsonDocument dataSizeCommand =
+                new BsonDocument("dataSize", new BsonString(collectionId.identifier()))
+                        .append("keyPattern", keyPattern)
+                        .append("min", min)
+                        .append("max", max)
+                        .append("estimate", new BsonBoolean(true));
+        return mongoClient
+                .getDatabase(collectionId.catalog())
+                .runCommand(dataSizeCommand, BsonDocument.class);
     }
 
     @Nullable

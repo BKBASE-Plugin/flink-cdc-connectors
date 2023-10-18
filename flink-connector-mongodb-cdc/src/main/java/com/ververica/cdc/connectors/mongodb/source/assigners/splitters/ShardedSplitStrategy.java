@@ -22,10 +22,12 @@ import org.apache.flink.table.types.logical.RowType;
 import com.mongodb.MongoQueryException;
 import com.mongodb.client.MongoClient;
 import com.ververica.cdc.connectors.base.source.meta.split.SnapshotSplit;
+import com.ververica.cdc.connectors.mongodb.source.utils.MongoUtils;
 import io.debezium.relational.TableId;
 import io.debezium.relational.history.TableChanges;
 import org.bson.BsonBoolean;
 import org.bson.BsonDocument;
+import org.bson.BsonInt64;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -34,7 +36,9 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 
+import static com.ververica.cdc.connectors.mongodb.internal.MongoDBEnvelope.BSON_MIN_KEY;
 import static com.ververica.cdc.connectors.mongodb.internal.MongoDBEnvelope.DROPPED_FIELD;
 import static com.ververica.cdc.connectors.mongodb.internal.MongoDBEnvelope.KEY_FIELD;
 import static com.ververica.cdc.connectors.mongodb.internal.MongoDBEnvelope.MAX_FIELD;
@@ -109,24 +113,72 @@ public class ShardedSplitStrategy implements SplitStrategy {
         schema.put(collectionId, collectionSchema(collectionId));
 
         List<SnapshotSplit> snapshotSplits = new ArrayList<>(chunks.size());
-        for (int i = 0; i < chunks.size(); i++) {
-            BsonDocument chunk = chunks.get(i);
-            snapshotSplits.add(
-                    new SnapshotSplit(
-                            collectionId,
-                            splitId(collectionId, i),
-                            rowType,
-                            new Object[] {splitKeys, chunk.getDocument(MIN_FIELD)},
-                            new Object[] {splitKeys, chunk.getDocument(MAX_FIELD)},
-                            null,
-                            schema));
+        AtomicInteger cnt = new AtomicInteger(0);
+        for (BsonDocument chunk : chunks) {
+            BsonDocument min = chunk.getDocument(MIN_FIELD);
+            BsonDocument max = chunk.getDocument(MAX_FIELD);
+
+            for (BsonDocument upper = null; !max.equals(upper); ) {
+                upper = findUpperBound(mongoClient, collectionId, splitKeys, min, max, 100000);
+                snapshotSplits.add(
+                        new SnapshotSplit(
+                                collectionId,
+                                splitId(collectionId, cnt.getAndIncrement()),
+                                rowType,
+                                new Object[] {splitKeys, min},
+                                new Object[] {splitKeys, upper},
+                                null,
+                                schema));
+                min = upper;
+            }
         }
 
+        LOG.info(
+                "Collection {} got total {} snapshot splits for {} chunks",
+                collectionId,
+                cnt.get(),
+                chunks.size());
         return snapshotSplits;
     }
 
     private boolean isValidShardedCollection(BsonDocument collectionMetadata) {
         return collectionMetadata != null
                 && !collectionMetadata.getBoolean(DROPPED_FIELD, BsonBoolean.FALSE).getValue();
+    }
+
+    private BsonDocument findUpperBound(
+            MongoClient mongoClient,
+            TableId collectionId,
+            BsonDocument key,
+            BsonDocument min,
+            BsonDocument max,
+            int sizeLimit) {
+        BsonDocument result =
+                MongoUtils.readEstimatedDataSize(mongoClient, collectionId, key, min, max);
+        long size = result.getNumber("numObjects").longValue();
+        LOG.info(
+                "Collection {} {} - {}: dataSize cmd result {}",
+                min.toJson(),
+                max.toJson(),
+                collectionId,
+                result.toJson());
+
+        if (size <= sizeLimit) {
+            return max;
+        } else {
+            String shardKey = key.getFirstKey();
+            long lower = min.get(shardKey) == BSON_MIN_KEY ? 0 : min.getInt64(shardKey).longValue();
+            long upper = max.getInt64(shardKey).longValue();
+            if (upper - lower <= 10) {
+                // unable to narrow down the scope
+                return max;
+            } else {
+                // narrow down the range by 10 as hash index is not evenly distributed
+                long newUpper = lower + (upper - lower) / 10;
+                BsonDocument newMax = new BsonDocument(shardKey, new BsonInt64(newUpper));
+
+                return findUpperBound(mongoClient, collectionId, key, min, newMax, sizeLimit);
+            }
+        }
     }
 }
