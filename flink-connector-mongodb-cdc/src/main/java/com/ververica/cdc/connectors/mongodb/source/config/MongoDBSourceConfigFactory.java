@@ -53,7 +53,7 @@ public class MongoDBSourceConfigFactory implements Factory<MongoDBSourceConfig> 
     private Integer batchSize = BATCH_SIZE.defaultValue();
     private Integer pollAwaitTimeMillis = POLL_AWAIT_TIME_MILLIS.defaultValue();
     private Integer pollMaxBatchSize = POLL_MAX_BATCH_SIZE.defaultValue();
-    private boolean updateLookup = true;
+    private boolean updateLookup = false;
     private StartupOptions startupOptions = StartupOptions.initial();
     private Integer heartbeatIntervalMillis = HEARTBEAT_INTERVAL_MILLIS.defaultValue();
     private Integer splitMetaGroupSize = CHUNK_META_GROUP_SIZE.defaultValue();
@@ -147,6 +147,19 @@ public class MongoDBSourceConfigFactory implements Factory<MongoDBSourceConfig> 
     public MongoDBSourceConfigFactory pollMaxBatchSize(int pollMaxBatchSize) {
         checkArgument(pollMaxBatchSize > 0);
         this.pollMaxBatchSize = pollMaxBatchSize;
+        return this;
+    }
+
+    /**
+     * change.stream.full.document
+     *
+     * <p>Determines what to return for update operations when using a Change Stream. When set to
+     * true, the change stream for partial updates will include both a delta describing the changes
+     * to the document and a copy of the entire document that was changed from some time after the
+     * change occurred. Default: false
+     */
+    public MongoDBSourceConfigFactory updateLookup(boolean updateLookup) {
+        this.updateLookup = updateLookup;
         return this;
     }
 
